@@ -1,7 +1,7 @@
 {code write by zero5556}
 uses crt;
 const max=3;
-      max_ply=2;
+      max_ply=1;
 var x,y,vtx,vty:byte;
     m,b,ply,ec:longint;
     pw,cw,kt:boolean;
