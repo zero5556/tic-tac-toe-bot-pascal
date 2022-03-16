@@ -1,7 +1,7 @@
 {code write by zero5556}
 uses crt;
 const max=3;
-      max_ply=7;
+      max_ply=2;
 var x,y,vtx,vty:byte;
     m,b,ply,ec:longint;
     pw,cw,kt:boolean;
@@ -159,6 +159,7 @@ begin
 s:=0;
 for x:=1 to max do
  for y:=1 to max do
+ if board[x,y]=0 then
  s:=s+evaluated(max_ply,x,y);
 eval:=s;
 end;
