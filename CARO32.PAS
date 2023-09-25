@@ -1,7 +1,7 @@
 {code write by zero5556}
 uses crt;
 const max=3;
-      max_ply=9;
+      max_ply=8;
       INF=9999;
 var x,y:byte;
     m,ec:longint;
@@ -87,20 +87,6 @@ begin
  else evaluated:=0;
 end;
 
-procedure printmap;
-var x,y:byte;
-begin
-for x:=1 to max do
-begin
- for y:=1 to max do
- begin
-  write(board[x,y]);
- end;
- writeln;
-end;
-writeln(m);
-end;
-
 function draw:boolean;
 var x,y:integer;
 begin
@@ -121,10 +107,9 @@ if depth=max_ply then
   minimax:=evaluated
 else if draw then
  minimax:=0
+else if checkwin('X') then minimax:=1
+else if checkwin('O') then minimax:=-1
 else if maxp then
- begin
- if checkwin('X') then minimax:=1
- else
  begin
   score:=-INF;
   for i:=1 to max do
@@ -137,11 +122,7 @@ else if maxp then
      board[i,j]:=' ';
     end;
    minimax:=score;
-   end;
  end
- else
- begin
- if checkwin('O') then minimax:=-1
  else
  begin
   score:=INF;
@@ -156,7 +137,6 @@ else if maxp then
      board[i,j]:=' ';
     end;
    minimax:=score;
-  end;
  end;
 end;
 
@@ -185,7 +165,7 @@ board[mx,my]:='O';
 gotoxy(mx,my);
 write(board[mx,my]);
 gotoxy(1,4);
-writeln('ply:',max_ply,' nodes:',ec,' eval:',best,' x:',mx,' y:',my);
+writeln('nodes:',ec,' eval:',best,' x:',mx,' y:',my);
 end;
 
 procedure map;
