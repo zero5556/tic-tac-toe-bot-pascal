@@ -5,7 +5,7 @@ const max=3;
       INF=9999;
 var x,y:byte;
     m,ec:longint;
-    kt:boolean;
+    kt,AIFirst:boolean;
     key:char;
     board:array[1..max,1..max] of char;
 
@@ -179,21 +179,47 @@ writeln
 end;
 End;
 
+procedure WhoGoFirst;
+var key:char;
+begin
+clrscr;
+write('Do you want to AI go first ? (Y/N): ');
+key:=readkey;
+case key of
+'y':begin AIFirst:=true; exit; end;
+'Y':begin AIFirst:=true; exit; end;
+'n':begin AIFirst:=false; exit; end;
+'N':begin AIFirst:=false; exit; end;
+end;
+AIFirst:=false;
+end;
+
 procedure infor;
 begin
 clrscr;
 writeln('code write by zero5556');
 writeln('AI:Zero 2.0');
-writeln('update: minimax algothirm');
+writeln('update: minimax algorithm');
 readln;
 clrscr;
 end;
 
 begin
-clrscr;
 infor;
+WhoGoFirst;
+clrscr;
 fillchar(board,sizeof(board),' ');
 map;
+
+if AIFirst then  { openning book for AI if Ai go first }
+ begin
+  board[2,2]:='O';
+  gotoxy(2,2);
+  write(board[2,2]);
+  gotoxy(1,4);
+  writeln('nodes:',0,' eval:',0,' x:',2,' y:',2);
+ end;
+
 while true do
  begin
   if checkwin('O') then begin gotoxy(1,8); write('computer win'); break end;
